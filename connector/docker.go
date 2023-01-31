@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/op/go-logging"
 	"github.com/hako/durafmt"
+	"github.com/op/go-logging"
 
 	"github.com/bcicen/ctop/connector/collector"
 	"github.com/bcicen/ctop/connector/manager"
@@ -300,6 +300,7 @@ func (cm *Docker) delByID(id string) {
 
 // Docker implements Connector
 func (cm *Docker) All() (containers container.Containers) {
+	cm.refreshAll()
 	cm.lock.Lock()
 	for _, c := range cm.containers {
 		containers = append(containers, c)
